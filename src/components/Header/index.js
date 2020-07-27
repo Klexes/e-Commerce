@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Logo from '../../assets/logo.png'
 import {auth} from '../../firebase/utils'
@@ -53,4 +54,8 @@ Header.defaultProps = {
     currentUser : null
 }
 
-export default Header
+const mapStateToProps = ({user}) => ({
+  currentUser: user.currentUser
+})
+
+export default connect(mapStateToProps, null)(Header)
