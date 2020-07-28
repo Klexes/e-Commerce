@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { withRouter} from 'react-router-dom'
 import './style.scss'
+import { SignUpUser, resetAllAuthForms } from './../redux/User/user.actions'
 import FormInput from '../Forms/FormInput';
 import Button from '../Forms/Button'
-import {auth, handleUserProfile} from '../../firebase/utils'
+
 import AuthWrapper from '../AuthWrapper';
 
-const SignUp = (props) => {
+const mapState = ({user}) => ({
+    signUpSuccess: user.signUpSuccess,
+    signUpError: user.signUpError,
+})
 
+const SignUp = (props) => {
+    const { signUpError, signUpSuccess} = useSelector(mapState)
+    const dispatch = useDispatch()
     const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmedPassword, setConfirmedPassword] = useState('')
     const [errors, setErrors] = useState([])
+
+    useEffect(() => {
+        if(signUpSuccess) {
+            reset()
+            dispatch(resetAllAuthForms())
+            props.history.push('/')
+        }
+    },[signUpSuccess])
+
+    useEffect(() => {
+        if (Array.isArray(signUpError) && signUpError.length > 0) {
+            setErrors(signUpError)
+        }
+    },[signUpError])
 
     const reset = () => {
         setDisplayName('')
@@ -23,25 +45,15 @@ const SignUp = (props) => {
     }
 
 
-    const handleFormSubmit = async event => {
-        event.preventDefault();        
-        if(password !== confirmedPassword){
-            const err = ['Passwords Don\'t match']
-            setErrors(err)
-            return;
-        }
-        try {
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        dispatch(SignUpUser({
+            displayName,
+            email,
+            password,
+            confirmedPassword
+        }))        
 
-            const { user } = await auth.createUserWithEmailAndPassword(email, password)
-            
-            await handleUserProfile(user, {displayName})
-
-            reset()
-            props.history.push('/')
-
-        } catch (error) {
-            // console.log(error)
-        }
     }
     
     return(
