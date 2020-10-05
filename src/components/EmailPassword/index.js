@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import './style.scss'
-import { resetPassword, resetAllAuthForms } from './../redux/User/user.actions'
+import { resetPassword, resetAllAuthForms } from '../../redux/User/user.actions'
 
 import AuthWrapper from '../AuthWrapper'
 import FormInput from '../Forms/FormInput'

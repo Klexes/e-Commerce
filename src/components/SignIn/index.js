@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.scss'
 import {useDispatch, useSelector} from 'react-redux'
-import { SignInUser, signInWithGoogle, resetAllAuthForms } from '../redux/User/user.actions'
+import { SignInUser, signInWithGoogle, resetAllAuthForms } from '../../redux/User/user.actions'
 
 import {Link, withRouter} from 'react-router-dom'
 import Button from '../Forms/Button'

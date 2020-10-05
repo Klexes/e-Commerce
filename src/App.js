@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import './default.scss'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import { auth, handleUserProfile } from './firebase/utils'
-import {setCurrentUser} from './components/redux/User/user.actions'
+import {setCurrentUser} from './redux/User/user.actions'
 
 //import hoc
 import WithAuth from './hoc/withAuth'

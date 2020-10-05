@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { withRouter} from 'react-router-dom'
 import './style.scss'
-import { SignUpUser, resetAllAuthForms } from './../redux/User/user.actions'
+import { SignUpUser, resetAllAuthForms } from '../../redux/User/user.actions'
 import FormInput from '../Forms/FormInput';
 import Button from '../Forms/Button'
 

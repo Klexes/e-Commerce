@@ -1,5 +1,5 @@
 import userTypes from './user.types'
-import { auth, handleUserProfile, GoogleProvider } from './../../../firebase/utils'
+import { auth, handleUserProfile, GoogleProvider } from '../../firebase/utils'
 
 export const setCurrentUser = user => ({
     type: userTypes.SET_CURRENT_USER,
